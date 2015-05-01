@@ -1,0 +1,30 @@
+this structure is based on ITCSS & BEM Methodologies:
+http://www.gpmd.co.uk/blog/scalable-css/
+https://speakerdeck.com/dafed/managing-css-projects-with-itcss
+
+---
+
+ITCSS
+
+Settings: Global variables config switches (colours, screen sizes)
+Tools: Functions and mixins
+Generic: Ground-zero styles (normalize/reset.css, box-sizing)
+Base: Unclassed HTML elements (type selectors)
+Objects: OOCSS - Unstyled design patterns (media object) e.g. ui-list {}
+Components: Styled objects, chunks of UI - e.g. products-list {}
+Theme (optional): Themed components, used for multiple sites with the same layout and components. Can be utilised for multi-site Magento setups.
+Trumps: Helpers and overrides, e.g. .float-left { float:left !important;}
+
+---
+
+BEM
+
+.person {}
+.person__hand {}
+.person--female {}
+.person--female__hand {}
+.person__hand--left {}
+
+<div class="person person--female">
+    <div class="person__hand person__hand--left person--female__hand"></div>
+</div>
