@@ -10,6 +10,7 @@ var rename  = require('gulp-rename');
 var compass = require('gulp-compass');
 var plumber = require('gulp-plumber');
 var cssmin  = require('gulp-cssmin');
+var del     = require('del');
 
 
 // Concatenate & Minify JS
@@ -22,7 +23,7 @@ gulp.task('scripts', function() {
 		.pipe(uglify())
 		.pipe(gulp.dest('../assets/js'));
 
-	gulp.src(['../assets/_js/*.js','../assets/_js/lib/*.js', '../assets/_js/app/*.js'])
+	gulp.src(['../assets/_js/*.js','../assets/_js/lib/jquery.plugins.js', '../assets/_js/app/*.js'])
 		.pipe(plumber())
 		.pipe(concat('main.js'))
 		.pipe(gulp.dest('../assets/js'))
@@ -45,8 +46,21 @@ gulp.task('compass', function() {
 		.pipe(gulp.dest('../assets/css/'));
 });
 
+// clean min
+gulp.task('clean:min', function (cb) {
+	del(
+		[
+			'../assets/css/**/*.min.css',
+		],
+		{
+			force: true
+		},
+		cb
+	);
+});
+
 // css min
-gulp.task('cssmin', function () {
+gulp.task('cssmin', ['clean:min'], function () {
 		gulp.src('../assets/css/**/*.css')
 				.pipe(cssmin())
 				.pipe(rename({suffix: '.min'}))
